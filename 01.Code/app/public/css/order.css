@@ -1,0 +1,155 @@
+
+* {
+    margin: 0;
+
+}
+
+body {
+    height: calc(100vh);
+    min-width:1100px;
+    overflow:auto;
+    min-height: 600px;
+}
+
+#app {
+   padding-top: 20px;
+    height: 100%;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.serch {
+    min-width:1000px;
+
+}
+.serch > div{
+    float: left;
+}
+.serch > div:first-child {
+    width: 52%;
+}
+.serch > div:nth-child(2) {
+    width: 22%;
+}
+.serch > div:last-child {
+    width: 26%;
+}
+.serch input {
+    height: 28px;
+    width: 20% !important;
+    margin-left: 15px;
+}
+input {
+    padding-left: 10px;
+}
+#searchphone {
+    width: 20%;
+    margin-right: 10px;
+}
+#searchBtn {;
+    margin-top: -5px;
+ }
+.chooseresult {
+     padding-left: 5px;
+     height: 28px;
+     margin-right: 20px;
+     width: 50%
+ }
+.chooseresultflag {
+    padding-left: 5px;
+    height: 28px;
+    margin-right: 20px;
+    width: 46%
+}
+.serchicon {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#sousuo {
+    margin-left: 10px;
+    height: 28px;
+}
+
+
+thead {
+    color: black;
+    font-size: 12px;
+}
+.table-bordered>thead>tr>td{
+    font-weight: 600;
+}
+tr  {
+    background-color: white;
+    font-size: 13px;
+    height: 35px;
+}
+td {
+    border: 1px solid #9b9b9b !important;
+    vertical-align: middle !important;
+}
+button {
+    padding-top: 6px !important;
+    padding-bottom: 3px !important;
+}
+.class-nav-ul{
+    float: right;
+}
+
+.class-nav-ul {
+    margin-right: 20px;
+}
+
+.slectcheck {
+    height: 40px;
+}
+.slectcheck>div {
+    float: left;
+    line-height: 30px;
+}
+.slectcheck select {
+    width: 100px;
+    height: 30px;
+    border-radius:2px;
+}
+
+.infoCheck {
+    margin-left: 70px;
+    height: 30px;
+    line-height: 30px;
+    color: red;
+}
+.checkspeak>div {
+    float: left;
+}
+.checkspeak>textarea {
+
+}
+.detail span {
+    color: #1eb6e4;
+    cursor: pointer;
+}
+.check {
+    background-color: rgb(41, 223, 228);
+    color: white;
+}
+.destroy {
+    color: white;
+    background-color: #ffd480;
+}
+.btn:hover {
+    color:white !important;
+}
+#checkarea {
+   overflow-x: hidden;
+}
+#delearea {
+    overflow-x: hidden;
+}
+.modal-header .close {
+    margin-top: -2px;
+    font-size: 30px;
+}
+#result {
+    width: 160px;
+}

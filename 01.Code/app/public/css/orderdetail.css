@@ -1,0 +1,36 @@
+
+#app {
+    padding-top: 20px;
+    height: 100%;
+}
+
+.active {
+    /*background-color: black ;*/
+}
+.content {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+}
+.content>div {
+    height: 16px;
+    line-height: 20px;
+    width: 25%;
+    padding-left: 10px;
+    float: left;
+    margin-top: 25px;
+    border-left: 3px solid #469ea7;
+}
+tr  {
+    background-color: white;
+    font-size: 13px;
+    height: 38px;
+}
+td {
+    border: 1px solid #9b9b9b !important;
+    vertical-align: middle !important;
+}
+#goback {
+    width: 100px;
+    margin-bottom: 20px;
+}
