@@ -1,0 +1,269 @@
+.color333{
+	color: #333;
+}
+.ft13{
+	font-size: 13px;
+}
+.clear{
+	clear: both;
+}
+.hide{
+	display: none;
+}
+
+/*.navbar-default .navbar-nav>li.clorb>a{
+	color: #0086B3;
+}*/
+.clorb{
+	line-height: 20px;
+	margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+
+}
+
+.clorb>span .language_active{
+	font-size: 16px;
+	color: #66d6fe;
+	font-weight: bold;
+}
+.content{
+	display: flex;
+	margin: 40px 0;
+	/*width: 1200px;*/
+	justify-content: space-between;
+}
+.content-box{
+	box-shadow:0 0 1px 1px #ccc;
+	width: 380px;
+	/*margin-right: 32px;*/
+	height: 440px;
+}
+.checkboxs{
+	font-size: 15px;
+}
+.checkboxs .checkbox{
+	margin-top: 5px;
+}
+.business-head{
+	background-color: #66d6fe;
+	padding: 30px 25px 15px 0;
+	color: #fff;
+}
+.professional-content{
+	padding: 30px 5px 0 15px;
+}
+.business-content{
+	color: #666;
+	padding-top: 30px;
+}
+.business-title{
+	font-size: 15px;
+}
+/*.business-content label span{
+	font-size: 13px;
+}*/
+.fist-situation,.second-situation{
+	margin-left: 15px;
+}
+ .duration.flex.form-group label{
+ 	width: 65px;
+ 	text-align: left;
+ 	line-height: 18px;
+ }
+ /*.duration.flex.form-group  span{
+ 	display: inline-block;
+ 	line-height: ;
+ 	}*/
+ .require{
+ 	position: relative;
+ 	display: inline-block;
+ }	
+.duration{
+	margin-left: 23px;
+}
+.require.form-group{
+	position: relative;	
+}
+.require.form-group:after{
+	content: '*';
+	color: red;
+	font-size: 20px;
+	position: absolute;
+ 	/*display: inline-block;*/
+ 	left: 347px;
+}
+.require.duration.form-group:after{
+	left: 294px;
+}
+/*.require :after{
+	content: '*';
+	color: red;
+	font-size: 20px;
+	position: absolute;
+ 	display: inline-block;
+}*/
+.tip2{
+	color: #999;
+	font-size: 12px;
+}
+#duration{
+	width: 224px;
+	margin-left: 0px;
+	/*margin-top: 8px;*/
+}
+.tip1{
+	margin-bottom: 10px;
+	margin-top: 5px;
+	font-size: 12px;
+	color: #fc9254;
+}
+.mb20{
+	margin-bottom: 20px;
+}
+/*.business-content li{
+	list-style: disc;
+	line-height: 30px;
+}*/
+.professional-head{
+	padding: 30px 25px 15px 0;
+	color: #fff;	
+	background-color: #efa302;
+}
+.customer-information{
+	padding-top: 15px;
+}
+.information-head{
+	font-size: 16px;
+	color: #333;
+}
+/*.discrib{
+	text-align: center;
+	color: #e8c0c0;
+	margin-top: 40px;
+}
+.price{
+	text-align: center;
+	color: #fc9254;
+	font-size: 40px;
+	margin-top: 40px;
+}*/
+.submit{
+	text-align: right;
+	margin-top: 20px;
+}
+.submit button{
+	color: #fff;
+	border: none;
+	background-color: #fc9254;
+	padding: 10px 30px;
+	outline: none;
+	border-radius: 6px;
+	/*margin-top: 30px;*/
+	/*margin-left:165px;*/
+}
+ input[type=radio]{
+ 	margin-right: 8px;
+ }
+ .customer-information span{
+ 	/*display: block;*/
+ 	margin-left: 10px;
+ 	line-height: 34px;
+ 	/*margin-bottom: 20px;*/
+ }
+button[disabled], html input[disabled]{
+	cursor: not-allowed;
+}
+.redcolor{
+	border: 1px solid #f00;
+}
+.flex .redcolor:focus{
+	border: 1px solid #f00;
+}
+label{
+	font-weight: normal;
+}
+.checkbox label, .radio label{
+	font-weight: normal;
+}
+button+button{
+	margin-left: 10px;
+}
+.modal-title{
+	color: #6aa5f5;
+}
+.modal-body{
+	color: #999;
+}
+ .modal-header{
+	border-bottom:none;
+	padding-bottom: 0;
+}
+#failed .modal-body{
+	color: #f01423;
+}
+ .modal-footer{
+	border-top: none;
+	padding-top: 0;
+}
+.errSubmit{
+	color: #F01423;	
+	margin-top: 40px;
+	margin-left: 75px;
+}
+/*.flex-box{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 20px auto;
+	color: #333;
+}
+.choice-head{
+	background-color: #80dee1;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin:auto;
+	margin-top: 15px;
+	margin-bottom: 12px;
+	display: inline-block;
+	line-height: 100px;
+}
+.choice{
+	width: 140px;
+	margin-right: 44px;
+	margin-bottom: 40px;
+	padding-bottom: 12px;
+	text-align: center;
+	background-color: #e0efe9;
+	position: relative;
+}
+.choice:hover .mask{
+	display: block;
+	cursor: pointer;
+}
+.product{
+	font-size: 16px;
+	font-weight: 600;
+}
+.mask{
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+	opacity: 0.3;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	font-size: 40px;
+	color: #16c54c;
+}
+.mask span{
+	margin-top: 50%;
+}
+.active{
+	display: block;
+	opacity: 1;
+}*/

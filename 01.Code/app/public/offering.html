@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offering</title>
+    <link rel="stylesheet" type="text/css" href="./css/portal/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/portal/offering.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/portal/common.css"/>
+</head>
+<body>
+<!--<script type="text/javascript" src="../../lib/jquery-2.1.1.js"></script>-->
+<script type="text/javascript" src='../../lib/vue.min.js'></script>
+<div id='app'>
+	<!--导航-->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <span class="clorb" >
+                <span @click="change_language">
+                    <span :class="{language_active:english}" id='eng'>En</span>/
+                    <span id='chin' :class="{language_active:!english}">中文</span>
+                </span>
+            </span>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a>
+                <li class="active"><a href="#">offering</a>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <div class="container" >
+    <div class="content" >
+        <div class="content-box checkboxs">
+            <div class="professional-head">
+                <div class="ft18 tc">{{languageVersion.productName}}</div>
+            </div>
+            <div class="professional-content">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"  v-model="checkAllEn" @change='checkAllChange'/><span>{{languageVersion.allProduct}}</span>
+                    </label>
+                </div>
+                <div class="checkbox pdl">
+                    <label>
+                        <input type="checkbox"   v-model='product.om' @change="productChange"/><span>OM - Service Order Management System</span>
+                    </label>
+                </div>
+                <div class="checkbox pdl">
+                    <label>
+                        <input type="checkbox"  v-model='product.im' @change="productChange"/><span>IM - Inventory Management System</span>
+                    </label>
+                </div>
+                <div class="checkbox pdl">
+                    <label>
+                        <input type="checkbox"  v-model='product.osp' @change="productChange"/><span>OSP - Outside Plant Management System</span>
+                    </label>
+                </div>
+                <div class="checkbox pdl">
+                    <label>
+                        <input type="checkbox"  v-model='product.am' @change="productChange"/><span>AM - Service Activation Management System</span>
+                    </label>
+                </div>
+                <div class="checkbox pdl">
+                    <label>
+                        <input type="checkbox" v-model='product.wfm'@change="productChange" /><span>WFM -WorkForce Management System</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="content-box">
+            <div class="business-head">
+                <div class="ft18 tc">{{languageVersion.scaleName}}</div>
+            </div>
+            <div class="business-content">
+                <div class="fist-situation">
+                    <div class="color333 business-title">{{languageVersion.scaleTitleH}}</div>
+                    <div><label class="mt10">
+                    	<input type="radio" v-model="project_scale"  value=1 name='homewide' @change="scaleChange"/><span>{{languageVersion.scaleOptionSmallH}}</span>
+                    </label></div>
+                     <div><label>
+                     	<input type="radio" v-model="project_scale"  value=2 name='homewide' @change="scaleChange"/><span>{{languageVersion.scaleOptionMiddleH}}</span>
+                     </label></div>
+                     <div><label>
+                     	<input type="radio" v-model="project_scale"  value=3 name='homewide' @change="scaleChange"/><span>{{languageVersion.scaleOptionLargeH}}</span>
+                     </label></div>
+                    <div class="tip1">{{languageVersion.scaleOptionTipsH}}</div>
+                </div>
+                <div class="second-situation">
+                    <div class="color333  business-title">{{languageVersion.scaleTitleD}}</div>
+                    <div>
+                    	<label class="mt10"><input type="radio" value=1 v-model="device_scale" name='device' @change="scaleChange"/><span>{{languageVersion.scaleOptionSmallD}}</span>
+                    </label></div>
+                    <div><label>
+                    	<input type="radio" value=2 name='device' v-model="device_scale"  @change="scaleChange"/><span>{{languageVersion.scaleOptionMiddleD}}</span>
+                    </label></div>
+                    <div><label>
+                    	<input type="radio" value=3 v-model="device_scale"  name='device' @change="scaleChange"/><span>{{languageVersion.scaleOptionLargeD}}</span>
+                    </label></div>
+                    <div class="tip1">{{languageVersion.scaleOptionTipsD}}</div>
+                </div>
+                <div class="mar">
+                    <div class="mt10 flex form-group duration require">
+                        <label for="duration">
+                            <div>{{languageVersion.durations}}</div>
+                            <div class="tip2">{{languageVersion.durationTip}}</div>
+                        </label>
+                        <input type="text" :class="[{redcolor:!formData.durationValid},'form-control']" id="duration" name="duration" v-model="formData.duration"
+                            :placeholder="languageVersion.durationP" @blur="formChange('duration')">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="" method="post" id="myform">
+            <div class="customer-information professional-content mt20">
+                <div class="information-head">{{languageVersion.contactTitle}}</div>
+                 <div class="form-group flex mt20 require">
+                    <label for="area">{{languageVersion.contactArea}}</label>
+                    <select :class="[{redcolor:!formData.areaValid},'form-control']" v-model='formData.areachose' name="area" @change="formChange('area')">
+                    	<option :value="item.value" v-for="item in areaOptions" >{{item.option}}</option>
+					</select>
+                </div>
+                <div class="form-group flex mt20 require">
+                    <label for="company">{{languageVersion.contactCompany}}</label>
+                    <input type="text" :class="[{redcolor:!formData.companyValid},'form-control']"  name="company"
+                           :placeholder="languageVersion.contactCompanyP" @blur="formChange('company')" v-model='formData.company'>
+                </div>
+                <div class="form-group flex require">
+                    <label for="contact">{{languageVersion.contactContacter}}</label>
+                    <input type="text" :class="[{redcolor:!formData.contacterValid},'form-control']"  name="contact"
+                           :placeholder="languageVersion.contactContacterP"  @blur="formChange('contacter')" v-model='formData.contacter'>
+                </div>
+                <div class="form-group flex require">
+                    <label for="phone">{{languageVersion.contactPhone}}</label>
+                    <input type="text" :class="[{redcolor:!formData.phoneValid},'form-control']" id="phone" name="phone"
+                           :placeholder="languageVersion.contactPhoneP" @blur="formChange('phone')" v-model='formData.phone'>
+                </div>
+                <div class="form-group flex require">
+                    <label for="email">{{languageVersion.contactEmail}}</label>
+                    <input type="email" :class="[{redcolor:!formData.emailValid},'form-control']" id="email" name="email"
+                           :placeholder="languageVersion.contactEmailP" @blur="formChange('email')" v-model='formData.email'>
+                </div>
+                <div class="errSubmit" v-if='errTip && !formValid'>{{languageVersion.errTips}}</div>
+                <div class="submit">
+                    <button type="button" class="submits"  value="Submit" @click="submitData" >{{languageVersion.submitBtn}}</button>
+                    <button type="button" class="reset" value="Reset" @click='resetClick'>{{languageVersion.resetBtn}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+	</div>
+<!--模态框-->
+<!--提交信息成功-->
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{languageVersion.modalSucceseT}}</h4>
+            </div>
+            <div class="modal-body">
+                <div>{{languageVersion.modalSucceseC}}</div>
+                <div>{{languageVersion.modalSucceseC2}}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{languageVersion.modalSucceseBtn}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--提交信息失败-->
+<div class="modal fade" tabindex="-1" role="dialog" id="failed">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <!--<h4 class="modal-title">Congratulations!</h4>-->
+            </div>
+            <div class="modal-body">
+                <div>{{languageVersion.modalFailedT}}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{languageVersion.modalFailedC}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="../../lib/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  var app=new Vue({
+    el:'#app',
+    data:{
+    	english:true,
+    	checkAllEn:false,
+    	product:{
+    		om:false,
+	    	im:false,
+	    	osp:false,
+	    	am:false,
+	    	wfm:false,
+    	},
+    	project_scale:0,
+    	device_scale:0,
+    	formValid:false, //最终验证结果
+    	formDataValid:false,//输入项验证结果
+    	errTip:false,//是否显示错误提示语
+    	checkBoxValid:false,//多选验证结果
+    	radioValid:false,//单选验证结果
+    	formData:{
+    		duration:'',
+    		durationValid:true,
+    		areachose:'none',
+    		areaValid:true,
+    		areachoseValid:true,
+    		company:'',
+    		companyValid:true,
+    		contacter:'',
+    		contacterValid:true,
+    		phone:'',
+    		phoneValid:true,
+    		email:'',
+    		emailValid:true
+    		},
+//  	errTips:'Please improve your information',	
+//  	submitBtnDis:true,
+		areaOptions:[{value:'none',option:'Choose your deployment area'},{value:'us-east-1',option:'US East(N.Virginia)'},{value:'us-east-2',option:'US East(Ohio)'},
+		{value:'us-west-1',option:'US West(N.California)'},{value:'us-west-2',option:'US West(Oregon)'},
+		{value:'ap-south-1',option:'Asia Pacific(Mumbai)'},{value:'ap-northeast-2',option:'Asia Pacific(Seoul)'},
+		{value:'ap-southeast-1',option:'Asia Pacific(Singapore)'},{value:'ap-southeast-2',option:'Asia Pacific(Sydney)'},
+		{value:'ap-northeast-1',option:'Asia Pacific(Tokyo)'},{value:'ca-central-1',option:'Canada(Central)'},
+		{value:'eu-central-1',option:'EU(Frankfurt)'},{value:'eu-west-1',option:'EU(Ireland)'},
+		{value:'eu-west-2',option:'EU(London)'},{value:'eu-west-3',option:'EU(Paris)'},
+		{value:'sa-east-1',option:'South America(Sao Paulo)'}],
+    	languageVersion:{
+    		productName:'Fulfillment OSS Product as Service',
+	    	scaleName:'Business Scale',
+	    	allProduct:'All Product',
+	    	scaleTitleH:'The scale of household broadband subscriber:',
+	    	scaleOptionSmallH:'Small(0-3 million]',
+	    	scaleOptionMiddleH:'Middle(3 million-6 million]',
+	    	scaleOptionLargeH:'Large(6 million- 20 million]',
+	    	scaleOptionTipsH:'Note:If more than 20 million,please contact our salesperson.',
+	    	scaleTitleD:'The amount of network device:',
+	    	scaleOptionSmallD:'Small(0-20 thousands]',
+	    	scaleOptionMiddleD:'Middle(20 thousands - 50 thousands]',
+	    	scaleOptionLargeD:'Large(50 thousands - 200 thousands]',
+	    	scaleOptionTipsD:'Note:If more than 200,000 ,please contact our salesperson.',
+	    	durations:'duration',
+	    	durationTip:'(in month)',
+	    	durationP:'Input your subscription duration',
+	    	contactTitle:'Leave Your Information',
+	    	contactArea:'Deployment area',
+	    	contactCompany:"Company",
+	    	contactCompanyP:"Please input your company",
+	    	contactContacter:'Contacter',
+	    	contactContacterP:'Please input your name',
+	    	contactPhone:'Phone',
+	    	contactPhoneP:'please input your phone number',
+	    	contactEmail:'Email',
+	    	contactEmailP:'Please input your email',
+	    	submitBtn:'Submit',
+	    	resetBtn:'Reset',
+	    	modalSucceseT:'Congratulations!',
+	    	modalSucceseC:'You have successfully submitted application for Huawei IES Cloud sevices.',
+	    	modalSucceseC2:'Huawei IES Cloud sales representative will cantact you shortly for further clarification.',
+	    	modalSucceseBtn:'close',
+	    	modalFailedT:'Sorry, order submission failed, please contact our salesperson!',
+	    	modalFailedC:'close',
+	    	errTips:'Please improve your information',
+    	}
+    }
+    ,computed:{},
+    methods:{
+    	//选中所有产品 或者取消选中所有产品
+    	checkAllChange(){
+    		if(this.checkAllEn){
+    			this.product={
+		    		om:true,
+			    	im:true,
+			    	osp:true,
+			    	am:true,
+			    	wfm:true,
+		    	}
+    		}else{
+    			this.product={
+		    		om:false,
+			    	im:false,
+			    	osp:false,
+			    	am:false,
+			    	wfm:false,
+		    	}
+    		}
+    		this.productChange();
+    	},
+    	//选择的产品改变时--判断是否有选择至少一个产品
+    	productChange(){
+	    	var bool=true;
+	
+	    	for(item in this.product){
+	    	 	if(this.product[item]){
+	    	 		bool=false;
+	    	 		 //如果所有产品都未选中，则取消选中所有产品
+	    	 		this.checkBoxValid=true;
+	    	 	}
+	    	}
+	    	 //如果所有产品都未选中，则取消选中所有产品
+	    	if(bool){
+	    	 	this.checkAllEn=false;
+	    	 	this.checkBoxValid=false;
+	    	}
+	    	//有一个选中则符合要求
+//	    	else{
+//	    		this.checkBoxValid=true;
+//	    	}
+//	    	console.log('产品选择',bool,this.checkBoxValid,);
+	    	
+	    	if(this.checkBoxValid && this.radioValid && this.formDataValid){
+	    		this.formValid=true;
+	    	}else{
+	    		this.formValid=false;
+	    	}
+    	},
+    	scaleChange(){
+    		if(this.project_scale || this.device_scale){
+    			this.radioValid=true;
+    		}else{
+    			this.radioValid=false;
+    		}
+ 			if(this.checkBoxValid && this.radioValid && this.formDataValid){
+	    		this.formValid=true;
+	    	}else{
+	    		this.formValid=false;
+	    	}
+    	},
+//  	areaChange(){
+//  		console.log(this.formData.areachose);
+//  	},
+    	formChange(val){
+    		var reg1 = /^([1-9][0-9]*){1,3}$/;
+//  		var bool=true;
+    		//若有参（单一验证），否则所有都验证
+    		if(val){
+    			if(val=='duration'){
+	    			if(reg1.test(this.formData.duration)){
+	    				this.formData.durationValid=true;
+	    			}else{
+	    				this.formData.durationValid=false;
+	    			}
+	    		}
+    			if(val=='area'){
+    				if(this.formData.areachose!=='none'){
+    					this.formData.areaValid=true;
+    				}else{
+    					this.formData.areaValid=false;
+    				}
+    			}
+	    		if(val=='company'){
+	    			if(this.formData.company.trim()){
+	    				this.formData.companyValid=true;
+	    			}else{
+	    				this.formData.companyValid=false;
+	    			}
+	    		}
+	    		if(val=='contacter'){
+	    			if(this.formData.contacter.trim()){
+	    				this.formData.contacterValid=true;
+	    			}else{
+	    				this.formData.contacterValid=false;
+	    			}
+	    		}
+	    		if(val=='phone'){
+	    			if(this.formData.phone.trim()){
+	    				this.formData.phoneValid=true;
+	    			}else{
+	    				this.formData.phoneValid=false;
+	    			}
+	    		}
+	    		if(val=='email'){
+
+              var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+	    			    if(reg.test(this.formData.email)) {
+	    			        this.formData.emailValid=true;
+	    			    } else {
+                            this.formData.emailValid=false;
+                        }
+	    		}
+    		}else{
+    			//验证期限
+    			if(reg1.test(this.formData.duration)){
+	    				this.formData.durationValid=true;
+	    			}else{
+	    				this.formData.durationValid=false;
+	    			}
+	    		//验证区域是否选择	
+	    		if(this.formData.areachose!=='none'){
+    					this.formData.areaValid=true;
+    				}else{
+    					this.formData.areaValid=false;
+    				}	
+				//验证公司是否填写	    	
+    			if(this.formData.company.trim()){
+	    				this.formData.companyValid=true;
+	    			}else{
+	    				this.formData.companyValid=false;
+	    			}
+	    		//验证联系人
+	    		if(this.formData.contacter.trim()){
+	    				this.formData.contacterValid=true;
+	    			}else{
+	    				this.formData.contacterValid=false;
+	    			}
+	    		//验证手机号	
+    			if(this.formData.phone.trim()){
+	    				this.formData.phoneValid=true;
+	    			}else{
+	    				this.formData.phoneValid=false;
+	    			}
+	    		//验证邮箱	
+//	    		if(this.formData.email.trim()){
+//	    				this.formData.emailValid=true;
+//	    			}else{
+//	    				this.formData.emailValid=false;
+//	    			}
+                var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                if(reg.test(this.formData.email)) {
+                    this.formData.emailValid=true;
+                } else {
+                    this.formData.emailValid=false;
+                }
+    		}
+    		if(this.formData.durationValid && this.formData.areaValid && this.formData.companyValid &&this.formData.contacterValid&&this.formData.phoneValid&&this.formData.emailValid){
+    			this.formDataValid=true;
+    		}else{
+    			this.formDataValid=false;
+    		}
+ 			if(this.checkBoxValid && this.radioValid && this.formDataValid){
+	    		this.formValid=true;
+	    	}else{
+	    		this.formValid=false;
+	    	}
+    	},
+    	submitData(){
+    		var products=[];
+    		var scale,order,submit_time,order_deadline;
+//  		var productValid=false;
+//  		var scaleValid=false;
+//  		var bool=true;
+    		//至少选择一个产品 否则验证不通过
+    		this.productChange();
+//  		for(item in this.product){
+//				if(this.product[item]){
+//					productValid=true;
+//				}
+//  		}
+    		//至少选择一个规模 否则验证不通过
+    		this.scaleChange();
+//  		if(this.project_scale || this.device_scale){
+//  			scaleValid=true
+//  		}
+    		//验证输入的表单是否符合要求
+    		this.formChange();
+    		if(this.checkBoxValid && this.radioValid && this.formDataValid){
+	    		this.formValid=true;
+    			this.errTip=false;//验证通过，不显示错误提示
+	    		
+	    	}else{
+	    		this.formValid=false;
+    			this.errTip=true;//验证未通过，显示错误提示
+//  			console.log('bu bu bu ')
+	    	}
+//	    	console.log('错误提示',this.errTip);
+    		//若验证通过
+    		if(this.formValid){
+    			var _this=this;
+    			var now_time = new Date();
+		        var year = now_time.getFullYear();
+		        var month = now_time.getMonth() + 1;
+		        var dat = now_time.getDate();
+		        var hour = now_time.getHours();
+		        var minute = now_time.getMinutes();
+		        var second = now_time.getSeconds();
+		        var mon = (this.formData.duration + month) % 12;
+		        var yea = Math.floor((this.formData.duration + month) / 12);
+		        submit_time = year + '-' + month + "-" + dat + " " + hour + ":" + minute + ":" + second;
+		        if ((this.formData.duration + month) % 12 == 0) {
+		            order_deadline = (year + yea - 1) + '-' + "12" + "-" + dat + " " + hour + ":" + minute + ":" + second;
+		        } else {
+		            order_deadline = (year + yea) + '-' + (mon) + "-" + dat + " " + hour + ":" + minute + ":" + second;
+		        }
+    			//获取选择的产品
+    			for(item in this.product){
+    				if(this.product[item]){
+    					products.push(item);
+    				}
+    			}
+//  			console.log(products);
+    			//获取选择的产品规格
+    			if(this.project_scale>= this.device_scale){
+    				scale=this.project_scale;
+    			}else{
+    				scale=this.device_scale;
+    			}
+	    		order = {
+		            "product": products,
+		            "duration": this.formData.duration,
+		            "device_scale": this.device_scale,
+		            "user_scale": this.project_scale,
+		            "scale": scale,
+		            "submit_time": submit_time,
+		            "order_deadline": order_deadline,
+		            "company":  this.formData.company,
+		            "contacter":  this.formData.contacter,
+		            "phone":  this.formData.phone,
+		            "emai":  this.formData.email,
+		            "area": this.formData.areachose
+		        };
+				$.ajax({
+		            type: "post",
+		            url: "/submitorder.do",
+		            dataType: "json",
+		            data: {
+		                order: JSON.stringify(order),
+		            },
+		            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		            success: function (data) {
+		                if (data == '1') {
+		                    $('#myModal').modal();
+						setTimeout(function(){
+//		                  $("input[type='text']").val("");
+		                  _this.product={
+					    		om:false,
+						    	im:false,
+						    	osp:false,
+						    	am:false,
+						    	wfm:false,
+					    	};
+					    	_this.checkAllEn=false;
+		                  	_this.formData={
+					    		duration:'',
+					    		durationValid:true,
+					    		areachose:'none',
+					    		areaValid:true,
+					    		areachoseValid:true,
+					    		company:'',
+					    		companyValid:true,
+					    		contacter:'',
+					    		contacterValid:true,
+					    		phone:'',
+					    		phoneValid:true,
+					    		email:'',
+					    		emailValid:true
+					    		};
+		                  	_this.project_scale=0;
+		                  	_this.device_scale=0;
+		                  	_this.errTip=false;
+//		                  $("input[type='email']").val("");
+//		                  $("input[type='checkbox']").prop("checked",false);
+//		                  $("input[type='radio']").prop('checked',false);
+		            	  },500);
+		                } else {
+		                    //失败的模态框
+		                   $('#failed').modal();
+		                  setTimeout(function(){
+		                  	 _this.product={
+					    		om:false,
+						    	im:false,
+						    	osp:false,
+						    	am:false,
+						    	wfm:false,
+					    	};
+					    	_this.checkAllEn=false;
+		                  	_this.formData={
+					    		duration:'',
+					    		durationValid:true,
+					    		areachose:'none',
+					    		areaValid:true,
+					    		areachoseValid:true,
+					    		company:'',
+					    		companyValid:true,
+					    		contacter:'',
+					    		contacterValid:true,
+					    		phone:'',
+					    		phoneValid:true,
+					    		email:'',
+					    		emailValid:true
+					    		};
+		                  	_this.project_scale=0;
+		                  	_this.device_scale=0;
+		                  	_this.errTip=false;
+//		                      $("input[type='text']").val("");
+//		                 	 _this.formData.areachose='none';
+//		                      $("input[type='email']").val("");
+//		                      $("input[type='checkbox']").prop("checked",false);
+//		                      $("input[type='radio']").prop('checked',false);
+		                  },500);
+		                }
+		            }
+		        });
+    		}
+    	},
+    	resetClick(){
+   		 window.location.href=window.location.href;
+    	},
+		change_language(){
+			this.english=!this.english;
+			if(this.english){
+			//英语版本
+			this.languageVersion={
+				productName:'Fulfillment OSS Product as Service',
+		    	scaleName:'Business Scale',
+		    	allProduct:'All Product',
+		    	scaleTitleH:'The scale of household broadband subscriber:',
+		    	scaleOptionSmallH:'Small(0-3 million]',
+		    	scaleOptionMiddleH:'Middle(3 million-6 million]',
+		    	scaleOptionLargeH:'Large(6 million- 20 million]',
+		    	scaleOptionTipsH:'Note:If more than 20 million, please contact our salesperson.',
+		    	scaleTitleD:'The amount of network device:',
+		    	scaleOptionSmallD:'Small(0-20 thousands]',
+		    	scaleOptionMiddleD:'Middle(20 thousands - 50 thousands]',
+		    	scaleOptionLargeD:'Large(50 thousands - 200 thousands]',
+		    	scaleOptionTipsD:'Note: If more than 200,000 ,please contact our salesperson.',
+		    	durations:'duration',
+		    	durationTip:'(in month)',
+		    	durationP:'input your subscription duration',
+		    	contactTitle:'Leave Your Information',
+		    	contactArea:'Deployment area',
+		    	contactCompany:"Company",
+		    	contactCompanyP:"please input your company",
+		    	contactContacter:'Contacter',
+		    	contactContacterP:'please input your name',
+		    	contactPhone:'Phone',
+		    	contactPhoneP:'please input your phone number',
+		    	contactEmail:'Email',
+		    	contactEmailP:'please input your email',
+		    	submitBtn:'Submit',
+		    	resetBtn:'Reset',
+		    	modalSucceseT:'Congratulations!',
+		    	modalSucceseC:'You have successfully submitted application for Huawei IES Cloud sevices.',
+		    	modalSucceseC2:'Huawei IES Cloud sales representative will cantact you shortly for further clarification.',
+		    	modalSucceseBtn:'close',
+		    	modalFailedT:'Sorry, order submission failed, please contact our salesperson!',
+		    	modalFailedC:'close',
+	    		errTips:'Please improve your information',
+			}
+			this.areaOptions=[{value:'none',option:'Choose your deployment area'},{value:'us-east-1',option:'US East(N.Virginia)'},{value:'us-east-2',option:'US East(Ohio)'},
+	    		{value:'us-west-1',option:'US West(N.California)'},{value:'us-west-2',option:'US West(Oregon)'},
+				{value:'ap-south-1',option:'Asia Pacific(Mumbai)'},{value:'ap-northeast-2',option:'Asia Pacific(Seoul)'},
+				{value:'ap-southeast-1',option:'Asia Pacific(Singapore)'},{value:'ap-southeast-2',option:'Asia Pacific(Sydney)'},
+				{value:'ap-northeast-1',option:'Asia Pacific(Tokyo)'},{value:'ca-central-1',option:'Canada(Central)'},
+				{value:'eu-central-1',option:'EU(Frankfurt)'},{value:'eu-west-1',option:'EU(Ireland)'},
+				{value:'eu-west-2',option:'EU(London)'},{value:'eu-west-3',option:'EU(Paris)'},
+				{value:'sa-east-1',option:'South America(Sao Paulo)'}]
+		}else{
+			//中文版
+			this.languageVersion={
+				productName:'产品选择',
+		    	scaleName:'业务规模',
+		    	allProduct:'选择所有产品',
+		    	scaleTitleH:'家宽业务客户规模:',
+		    	scaleOptionSmallH:'小规模(0-300万]',
+		    	scaleOptionMiddleH:'中规模(300万-600万]',
+		    	scaleOptionLargeH:'大规模(600万- 2000万]',
+		    	scaleOptionTipsH:'注：2000万以上不支持，请联系销售人员。',
+		    	scaleTitleD:'有源设备规模:',
+		    	scaleOptionSmallD:'小规模(0-2万]',
+		    	scaleOptionMiddleD:'中规模(2万 - 5万]',
+		    	scaleOptionLargeD:'大规模(5万 - 20万]',
+		    	scaleOptionTipsD:'注：20万以上请联系销售人员。',
+		    	durations:'期限',
+		    	durationTip:'(单位/月)',
+		    	durationP:'输入您的订阅期限',
+		    	contactTitle:'您的联系方式',
+		    	contactArea:'部署区域',
+		    	contactCompany:"公司名称",
+		    	contactCompanyP:"请输入您的公司名称",
+		    	contactContacter:'联系人',
+		    	contactContacterP:'请输入您的姓名',
+		    	contactPhone:'联系电话',
+		    	contactPhoneP:'请输入您的电话号码',
+		    	contactEmail:'邮箱',
+		    	contactEmailP:'请输入您的电子邮件',
+		    	submitBtn:'提交',
+		    	resetBtn:'重置',
+		    	modalSucceseT:'信息提交成功!',
+		    	modalSucceseC:'您已成功提交华为IES云服务申请。',
+		    	modalSucceseC2:'华为IES Cloud销售代表会尽快与您联系进一步确认。',
+		    	modalSucceseBtn:'关闭',
+		    	modalFailedT:'对不起，订单提交失败，请联系销售人员！',
+		    	modalFailedC:'关闭',
+	    		errTips:'请完善您的信息',
+			};
+			this.areaOptions=[{value:'none',option:'请选择您的部署区域'},{value:'us-east-1',option:'美国东部(弗吉尼亚北部)'},{value:'us-east-2',option:'美国东部(俄亥俄)'},
+	    		{value:'us-west-1',option:'美国西部(加利福尼亚北部)'},{value:'us-west-2',option:'美国西部(俄勒冈)'},
+				{value:'ap-south-1',option:'亚太区域(孟买)'},{value:'ap-northeast-2',option:'亚太区域(首尔)'},
+				{value:'ap-southeast-1',option:'亚太区域(新加坡)'},{value:'ap-southeast-2',option:'亚太区域(悉尼)'},
+				{value:'ap-northeast-1',option:'亚太区域(东京)'},{value:'ca-central-1',option:'加拿大(中部)'},
+				{value:'eu-central-1',option:'欧洲(法兰克福)'},{value:'eu-west-1',option:'欧洲(爱尔兰)'},
+				{value:'eu-west-2',option:'欧洲(伦敦)'},{value:'eu-west-3',option:'	欧洲(巴黎)'},
+				{value:'sa-east-1',option:'南美洲(圣保罗)'}];
+			}
+    	},
+    }
+})
+</script>
+</body>
+</html>

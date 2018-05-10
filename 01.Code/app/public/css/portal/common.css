@@ -1,0 +1,110 @@
+/*element样式覆盖*/
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	background: #03c3b4;
+}
+.navbar-default{
+	min-width:1200px
+}
+.checkbox{
+	margin: 0;
+	line-height: 35px;
+	height: 35px;
+}
+input[type=checkbox]{
+	margin-top: 11px;
+}
+.mynav.navbar {
+	margin-bottom:0;
+}
+.flex.form-group{
+	display: flex;
+}
+.flex.form-group label{
+	line-height: 34px;
+	/*font-weight: 100;*/
+	width: 107px;
+	margin-bottom: 0;
+	text-align: right;
+}
+.flex.form-group .form-control{
+	/*width: 78px;*/
+	/*height: 36px;*/
+	margin-left: 15px;
+	box-shadow: none;
+	width: 222px;
+}
+.flex .form-control:focus{
+	border-color:#ccc
+}
+.carousel-caption{
+	width: 100%;
+}
+/*公共样式*/
+.ft40{
+	font-size: 40px;
+}
+.ft18{
+	font-size: 18px;
+}
+.mt10{
+	margin-top: 10px;
+}
+.mt20{
+	margin-top: 20px;
+}
+.mt40{
+	margin-top: 40px;
+}
+.ml10{
+	margin-left: 10px;
+}
+.ml20{
+	margin-left: 20px;
+}
+.ml30{
+	margin-left: 40px;
+}
+.pdl{
+	padding-left: 10px;
+}
+.fl{
+	float: left;
+}
+.clear:after{
+	clear: both;
+	font-size: 0;
+	content: '';
+}
+/*.tl{
+	text-align: left;
+}*/
+.tr{
+	text-align: right;
+}
+.tc{
+	text-align: center;
+}
+/*导航栏*/
+/*header{
+	height: 70px;
+}
+header ul{
+	display: flex;
+	justify-content:flex-end;
+}
+header ul li{
+	padding: 12px 25px;
+}*/
+.container{
+	width: 1200px;
+	margin: auto;
+	/*text-align: center;*/
+}
+/*页脚*/
+/*footer{
+	height: 120px;
+	padding: 40px 0;
+	text-align: center;
+	color: #666;
+	background-color: #f5f0f0 ;
+}*/

@@ -1,0 +1,182 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>华为 Fulfillment OSS云自动部署后台管理平台</title>
+    <link rel="stylesheet" href="../css/login.css">
+
+</head>
+<body>
+<div class="app-content" id="app">
+    <div v-if="languageFlag" @click="changgeLanguage" class="chang"><span class="languagecolor">中文</span> / <span>English</span>
+    </div>
+    <div v-else @click="changgeLanguage" class="chang"><span>中文</span> / <span class="languagecolor">English</span>
+    </div>
+    <div>
+        <p v-if="languageFlag">用户登录</p>
+        <p v-else>User Login</p>
+    </div>
+    <div class="form-group">
+        <div v-if="languageFlag" class="col-sm-2 control-label">登录名：</div>
+        <div v-else class="col-sm-2 control-label">Login Name：</div>
+        <input v-if="languageFlag" @keyup="checkuser" v-model="username" placeholder="请输入登录名" id="username"
+               class="control-input form-control"/>
+        <input v-else @keyup="checkuser" v-model="username" placeholder="Please input login name" id="username"
+               class="control-input form-control"/>
+    </div>
+    <div class="form-group">
+        <div v-if="languageFlag" class="col-sm-2 control-label">密码：</div>
+        <div v-else class="col-sm-2 control-label">Password：</div>
+        <input v-if="languageFlag" @blur="changeValid"   @keyup.enter="userlogin" type="password" v-model="password"  placeholder="请输入密码"
+               id="password" class="control-input form-control"/>
+        <input v-else v-model="password" @keyup.enter="userlogin"  type="password" placeholder="Please input password"
+               id="password" class="control-input form-control"/>
+    </div>
+    <div v-if="info!=''" class="red">{{info}}</div>
+    <div class="form-group">
+        <input type="checkbox" id="chooseall"  name="class">
+        <span v-if="languageFlag">记住密码</span>
+        <span v-else>Remember password</span>
+    </div>
+    <div class="mar50">
+        <button v-if="languageFlag" class="btn btn-info" type="button" @click="userlogin">登录</button>
+        <button v-else class="btn btn-info" type="button" @click="userlogin">Login</button>
+    </div>
+</div>
+<!--<script src="https://unpkg.com/vue"></script>-->
+<script src="../lib/vue.min.js"></script>
+<script src="../lib/jquery-2.1.1.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            info: "",
+            languageFlag: false,
+            username: "",
+            password: ""
+        },
+        created() {
+
+            if (window.sessionStorage.getItem('language') == 'chinese') {
+                this.languageFlag = true
+            } else if (window.sessionStorage.getItem('language') == 'english') {
+                this.languageFlag = false
+            }
+
+            var username = "uname";
+            var password = 'password';
+            function getCookieValue(name) {
+                var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+                if (arr != null) {
+                    return unescape(arr[2]);
+                }
+                return null;
+            }
+            if (getCookieValue(username) && getCookieValue(password)) {
+                this.username = getCookieValue(username);
+                this.password = getCookieValue(password);
+                $('#chooseall').attr('checked', true)
+            }
+        },
+        methods: {
+            changeValid(){
+                    this.info=''
+            },
+            changgeLanguage() {
+                if (this.languageFlag == false) {
+                    this.languageFlag = true;
+                    window.sessionStorage.setItem('language', 'chinese');
+                    document.title = '用户登录'
+                } else {
+                    this.languageFlag = false;
+                    window.sessionStorage.setItem('language', 'english');
+                    document.title = 'User login'
+                }
+            },
+            checkuser() {
+                this.info = '';
+                $('#chooseall').attr('checked', false)
+            },
+            setCookie(name, value, Days) {
+                var exp = new Date();
+                exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+                if ((typeof value == "string") && (value.length > 0)) {
+                    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+                } else {
+                    var exp = new Date();
+                    exp.setTime(exp.getTime() - 1);
+                    var cval = this.getCookieValue(name);
+                    if (cval != null)
+                        document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+                }
+            },
+            getCookieValue(name) {
+                var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+                if (arr != null) {
+                    return unescape(arr[2]);
+                }
+                return null;
+            },
+            userlogin: function () {
+                console.log(12)
+                var reguser = /^\w{5,}$/;
+                var reapwd = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/;
+                if (this.username == '') {
+                    this.info = this.languageFlag ? "用户名不能为空！" : "The username can not be empty!";
+                    return false
+                } else if (this.password == '') {
+                    this.info = this.languageFlag ? "密码不能为空!" : "The password can not be empty!";
+                    return false
+                } else if (reguser.test(this.username) == false) {
+                    this.info = this.languageFlag ? "请输入正确的用户名！" : 'Please enter the correct username!'
+                    return false
+                } else if (reapwd.test(this.password) == false) {
+                    this.info = this.languageFlag ? "密码错误" : "Password error";
+                    return false
+                } else {
+                   var  _this = this;
+                    $.ajax({
+                        url: '/login.do',
+                        type: 'post',
+                        data: {
+                            username: _this.username, password: _this.password
+                        },
+                        success(data) {
+                            data1 = data.split(";");
+                            if (data1[0] == 'ok') {
+
+                                var value1 = _this.username;
+                                var value2 = _this.password;
+                                if ($('#chooseall').get(0).checked) {
+                                    _this.setCookie("uname", value1, 1);
+                                    _this.setCookie('password', value2, 1);
+                                } else if ($('#chooseall').attr('checked', "false")) {
+                                    _this.setCookie("uname", "", 0);
+                                    _this.setCookie('password', "", 0);
+                                }
+
+
+                                location.href = "/page/index.html";
+                                var user = {
+                                    user_flag: data1[1],
+                                    user_id: data1[2],
+                                    login_name: data1[3],
+                                    user_name: data1[4]
+                                }
+                                window.sessionStorage.setItem('user', JSON.stringify(user));
+                            } else if (data == 'disabled') {
+                                _this.info = _this.languageFlag ? '你登录的帐号已被禁用，请联系管理人员！' : 'Your login account has been disable, please contact the manager!'
+                            } else if (data == 'erropwd') {
+                                _this.info = _this.languageFlag ? '密码不正确,请重新输入！' : 'The password is incorrect, please reenter it'
+                            } else if (data == 'fail') {
+                                _this.info = _this.languageFlag ? '用户名不存在，请重新登陆！' : 'The username does not exist, please login again'
+                            }
+                        }
+                    })
+                }
+            }
+        },
+    })
+</script>
+</body>
+</html>

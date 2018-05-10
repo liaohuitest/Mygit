@@ -1,0 +1,166 @@
+body{
+	min-width: 1200px;
+}
+.benefits-title{
+	padding: 20px 0;
+	font-size: 24px;
+	color: #13dba2;
+	font-weight: 700;
+	/*margin-top: 40px;*/
+}
+.benefits-flex{
+	display: flex;
+	flex-wrap: wrap;
+	/*text-align: left;*/
+	justify-content:center;
+	margin-top: 20px;
+}
+.benefits-content{
+	width: 35%;
+	display: flex;
+	/*justify-content: flex-end;*/
+	/*margin-left: 30px;*/
+	line-height: 24px;
+}
+.benefit-title{
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+/*.benefit-img {
+	width: 80px;
+	height: 80px;
+}*/
+.benefit-content{
+	color: #fff;
+}
+.benefit-content :before{
+	color: #FFFFFF;
+}
+.solutions{
+	margin-top: 30px;
+	height: 350px;
+	/*border: 1px solid #ccc;*/
+	background-color: #faf7f7;
+	text-align: center;
+	padding-top: 40px;
+}
+.hightlights{
+	/*margin: 30px 0px 40px 100px;*/
+	text-align: left;
+	/*margin-left: 5%;
+	margin-top: 30px;*/
+}
+.hightlights-title{
+	text-align: center;
+	font-size: 24px;
+	margin-top: 30px;
+	color: #0596c7;
+	
+}
+.hightlight{
+	width: 370px;
+	float: left;
+	margin-right: 165px;
+	/*margin-bottom: 30px;*/
+}
+.hightlight-head{
+	text-align: center;
+	background-color: #49aeca;
+	border-radius: 6px;
+	color: #fff;
+	/*height: 28px;*/
+	line-height: 28px;
+}
+.hightlight-content{
+	padding: 10px 5px 10px 24px;
+	margin-top: 10px;
+	/*border: 2px solid  #49aeca;*/
+	height: 147px;
+}
+.hightlight-content li{
+	list-style: disc;
+}
+.father{
+	position: relative;
+}
+.hightlight-title{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	font-size: 20px;
+	/*border-radius: 50%;*/
+	/*background:linear-gradient(to bottom,#0596c7,#88cce1);*/
+	color: #fff;
+	/*line-height: 55px;*/
+	text-align: center;
+	padding-top: 30px;
+	position: absolute;
+	left: 400px;
+	top: 122px;
+	line-height: 40px;
+}
+.flexible{
+	/*padding-top: 100px;*/
+	padding-left: 220px;
+}
+.efficient{
+	/*margin-top: 20px;*/
+	padding-left: 50px;
+}
+.safe{
+	padding-left: 500px;
+	margin-top: 20px;
+}
+.save{
+	padding-left: 650px;
+	margin-top: 20px;
+}
+.first.carousel-caption{
+	bottom:0;
+	top: 0;
+	left: 0;
+	font-size: 32px;
+	text-align: left;
+	padding-top: 250px;
+}
+.second .carousel-caption{
+	left: 160px;
+	text-align: left;
+	top: 0;
+	font-size: 25px;
+	bottom: 0;
+}
+/*.second .carousel-inner>.item>img{
+	z-index: 10;
+}*/
+.third.carousel-caption{
+	left: 0;
+	text-align: left;
+	top: 0;
+	padding-top: 50px;
+}
+.fourth.carousel-caption{
+	left: 40%;
+	text-align: left;
+	top: 0;
+	padding-top: 50px;
+	font-size: 25px;
+}
+.fifth.carousel-caption{
+	left: 0;
+	background-color: #33344c;
+	bottom: 0;
+	padding-left: 200px;
+	top: 0;
+	padding-top: 60px;
+}
+.carousel-indicators .active,.carousel-indicators li{
+	margin-left: 10px;
+}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img{
+	height: 517.41px;
+	width: 100%;
+}
+.carousel-control.left,.carousel-control.right{
+	z-index: 100;
+}

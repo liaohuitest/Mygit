@@ -1,0 +1,91 @@
+
+* {
+    margin: 0;
+
+}
+
+body {
+    height: 602px;
+    overflow: auto;
+}
+
+#app {
+   padding-top: 20px;
+    background-color: #f6f6f6;
+    height: 100%;
+}
+input {
+    padding-left: 10px;
+}
+.search {
+    height: 28px;
+    width: 180px;
+}
+#sousuo {
+    margin-left: 10px;
+    height: 28px;
+}
+.adduser span {
+    font-size: 14px;
+}
+.adduser {
+    font-size: 16px !important;
+}
+thead {
+    color: black;
+    font-size: 12px;
+}
+.table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border-bottom-width: 2px;
+    line-height: 38px;
+    text-align: center;
+    border: 1px solid #555555 !important;
+}
+tr  {
+    background-color: white;
+    font-size: 13px;
+}
+td {
+    border: 1px solid #9b9b9b !important;
+    vertical-align: middle !important;
+}
+button {
+    font-size: 12px !important;
+}
+button span {
+    font-size: 12px;
+}
+.class-nav-ul{
+    float: right;
+}
+
+.class-nav-ul {
+    margin-right: 20px;
+}
+
+.disable {
+    background-color: #ffbd88;
+    color: white;
+}
+.btn:hover {
+    color:white !important;
+}
+.err {
+    color: red;
+}
+.info {
+    text-align: center;
+    color: red;
+    line-height: 34px;
+    height: 34px;
+}
+.infoedit {
+    text-align: right;
+    color: red;
+    line-height: 34px;
+    height: 34px;
+}
+.modal-header .close >span{
+    margin-top: -2px ;
+    font-size: 30px !important;
+}
