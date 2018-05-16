@@ -7,8 +7,8 @@ const db = mysqlpool.sqlpool();
 /*亚马逊配置凭证*/
 // AWS.config.loadFromPath('./routes/config.json');
 AWS.config.update({
-    accessKeyId: 'AKIAIRAXIOEQK5RHJ2XA',
-    secretAccessKey: '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'
+    accessKeyId: '',
+    secretAccessKey: ''
 });
 /*创建云服务模板*/
 const templat = require('./model.js');
